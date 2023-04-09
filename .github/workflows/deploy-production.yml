@@ -1,0 +1,15 @@
+name: Deploy to Firebase Hosting on merge to main
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install the Firebase CLI
+        run: |
+          curl -sL https://firebase.tools | bash
+      - name: Deploy to Firebase
+        run: firebase deploy --token "${{ secrets.FIREBASE_TOKEN }}"
